@@ -1,23 +1,10 @@
+####################################################################################################################
+# WARNING: Do not store sensitive information in this file, as its contents will be included in the Qodana report. #
+####################################################################################################################
+
 version: "1.0"
-
-# Qodana configuration for the code-smells-python repository.
-# https://www.jetbrains.com/help/qodana/qodana-yaml.html
-
-# Use the Python community linter.
-linter: jetbrains/qodana-python-community:2026.1
-
-# Commands executed inside the Qodana container before analysis starts.
-#
-# The `command-line-shell/after` project is a Poetry project with third-party
-# dependencies (colorama, cryptography, cffi, pycparser). Without them installed
-# in the container interpreter, Qodana cannot resolve a Python SDK for those
-# files and reports false positives such as "Unresolved reference 'str'".
-#
-# Installing the dependencies into the container's system interpreter
-# (virtualenvs.create false) makes Qodana's default interpreter complete, so
-# both builtins and project imports resolve correctly.
-bootstrap: |
-  python -m pip install --upgrade pip poetry
-  cd command-line-shell/after
-  poetry config virtualenvs.create false
-  poetry install --no-root --only main
+linter: qodana-python
+profile:
+  name: qodana.recommended
+include:
+  - name: CheckDependencyLicenses
