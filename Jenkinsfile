@@ -1,7 +1,7 @@
 pipeline {
     environment {
-        QODANA_TOKEN=credentials('qodana-token')
-        QODANA_ENDPOINT='https://qodana.cloud'
+        QODANA_TOKEN = credentials('qodana-token')
+        QODANA_ENDPOINT = 'https://qodana.cloud'
     }
     agent {
         docker {
@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Qodana') {
             steps {
-                sh '''qodana'''
+                sh 'qodana'
             }
         }
     }
