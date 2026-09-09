@@ -1,7 +1,7 @@
 pipeline {
     environment {
         QODANA_TOKEN=credentials('qodana-token')
-        QODANA_ENDPOINT='https://web.cloud.sssa-stgn.aws.intellij.net'
+        QODANA_ENDPOINT='https://qodana.cloud'
     }
     agent {
         docker {
