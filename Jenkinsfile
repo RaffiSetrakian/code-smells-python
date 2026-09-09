@@ -1,13 +1,21 @@
 pipeline {
-    agent any
     environment {
-        QODANA_TOKEN = credentials('qodana-token')
-        QODANA_ENDPOINT = 'https://web.cloud.sssa-stgn.aws.intellij.net'
+        QODANA_TOKEN=credentials('qodana-token')
+        QODANA_ENDPOINT='https://web.cloud.sssa-stgn.aws.intellij.net'
+    }
+    agent {
+        docker {
+            args '''
+              -v "${WORKSPACE}":/data/project
+              --entrypoint=""
+              '''
+            image 'jetbrains/qodana-python:2026.1'
+        }
     }
     stages {
         stage('Qodana') {
             steps {
-                sh '/usr/local/bin/docker run --rm -v "${WORKSPACE}":/data/project -e QODANA_TOKEN=$QODANA_TOKEN -e QODANA_ENDPOINT=$QODANA_ENDPOINT jetbrains/qodana-python:2026.1 --show-report'
+                sh '''qodana'''
             }
         }
     }
