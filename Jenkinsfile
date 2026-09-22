@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         QODANA_TOKEN = credentials('qodana-token')
-        QODANA_ENDPOINT = 'https://web.cloud.sssa-stgn.aws.intellij.net'
     }
     stages {
         stage('Qodana') {
