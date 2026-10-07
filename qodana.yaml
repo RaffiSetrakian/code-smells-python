@@ -1,19 +1,10 @@
-name: Qodana
+####################################################################################################################
+# WARNING: Do not store sensitive information in this file, as its contents will be included in the Qodana report. #
+####################################################################################################################
 
-on:
-  push:
-    branches:
-      - main
-      - dev
-
-jobs:
-  qodana:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Qodana Scan
-        uses: JetBrains/qodana-action@v2026.2
-        env:
-          QODANA_ENDPOINT: "https://web.cloud.sssa-qa.aws.intellij.net"
+version: "1.0"
+linter: qodana-python
+profile:
+  name: qodana.recommended
+include:
+  - name: CheckDependencyLicenses
